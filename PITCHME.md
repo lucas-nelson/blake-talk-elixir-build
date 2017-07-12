@@ -70,9 +70,11 @@ Running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
 
 ---
 
-There is also some work done to use a cache for the deps.
+There is also work done to use a cache for the deps.
 
-A directory that exists on the EC2 build agent instance is 'mounted' in the Docker container doing the build. At the end of the build process, those files are copied into the container because that cache-mount won't be available when running the container for real.
+* a directory on the builder-agent is 'mounted' in the container
+* after compilation, the cached files are copied into the container
+* otherwise they won't be available when running the container for real
 
 ---
 
