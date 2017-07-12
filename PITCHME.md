@@ -49,7 +49,7 @@ The buildkite build consists of three phases:
 
 #### build
 
-Running on an AWS EC2 instance, the buildkite 'agent':
+Running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
 
 1. pulls the `builder-elixir-1.4` container from AWS ECR and runs it to…
 2. clones the git repo at the right SHA for the build
@@ -65,6 +65,58 @@ Running on an AWS EC2 instance, the buildkite 'agent':
 1. installs `hex` and `rebar`
 2. `mix deps.get` and `mix compile` for the *staging* and *prod* environments
 
-<aside class="notice">There is also some work done to use a cache for the deps. That is a directory that exists on the EC2 build agent instance that is 'mounted' in the Docker container doing the build. At the end of the build process, those files are copied into the container because that cache-mount won't be available when running the container for real.</aside>
-
 <small>https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-elixir-base/scripts/prepare_code</small>
+
+---
+
+There is also some work done to use a cache for the deps.
+
+A directory that exists on the EC2 build agent instance is 'mounted' in the Docker container doing the build. At the end of the build process, those files are copied into the container because that cache-mount won't be available when running the container for real.
+
+---
+
+At this point the container that could be deployed to staging or production is complete. It's in ECR
+
+---
+
+#### test
+
+Running on an AWS EC2 instance, the buildkite 'ci-tester-agent':
+
+1. pulls the newly build docker image from AWS ECR and runs it with a 'test' command to…
+2. run the `scripts/docker/ci.sh`
+
+<small>
+https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28
+https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12
+https://github.com/blake-education/student_events/blob/develop/script/docker/ci.sh
+</small>
+
+---
+
+##### ci.sh
+
+1. compiles for the `test` env
+2. drop, creates and migrates any databases it needs
+3. `mix test`
+4. `mix credo`
+
+<small>https://github.com/blake-education/student_events/blob/develop/script/docker/ci.sh</small>
+
+---
+
+### release
+
+Has been explained to me as "it just tags the container".
+
+But the container was already tagged in the `prepare_code` stage: https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build#L96-L102
+
+So yeah I'm not sure. This stag does not do much
+
+---
+
+## what was all that?
+
+1. the app is compiled both for staging and prod in a new container during the first stage of the build
+2. the tests are run on the container, but no changes are uploaded to ECR
+3. the unmodified container from step 1 is available for deploy
