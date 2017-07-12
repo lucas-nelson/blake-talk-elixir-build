@@ -12,7 +12,7 @@
 
 ### containers
 
-there's a container called `builder-elixir-1.4` that has useful stuff in it…
+there's a container called *builder&#8209;elixir&#8209;1.4* that has useful stuff in it…
 
 ```bash
 docker \
@@ -51,9 +51,9 @@ the buildkite build consists of three phases:
 
 #### build
 
-running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
+running on an AWS EC2 instance, the buildkite *ci&#8209;builder&#8209;agent*:
 
-1. pull the `builder-elixir-1.4` container from AWS ECR and runs it to…
+1. pull the *builder&#8209;elixir&#8209;1.4* container from AWS ECR and runs it to…
 2. clone the git repo at the right SHA for the build
 3. run `prepare_code` which does all the interesting work
 4. `docker build` the container for deployment and `docker push` it to AWS ECR
@@ -90,7 +90,7 @@ it won't change
 
 #### test
 
-running on an AWS EC2 instance, the buildkite 'ci-tester-agent':
+running on an AWS EC2 instance, the buildkite *ci&#8209;tester&#8209;agent*:
 
 1. pull the newly build docker image from AWS ECR and runs it with a 'test' command to…
 2. run the `scripts/docker/ci.sh`
