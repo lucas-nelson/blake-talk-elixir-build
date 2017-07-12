@@ -15,7 +15,11 @@
 There's a container called `builder-elixir-1.4` that has useful stuff in it…
 
 ```bash
-docker run -it --entrypoint /bin/bash 153929397925.dkr.ecr.us-west-2.amazonaws.com/builder-elixir-1.4
+docker \
+  run \
+  -it \
+  --entrypoint /bin/bash \
+  153929397925.dkr.ecr.us-west-2.amazonaws.com/builder-elixir-1.4
 ```
 
 ---
@@ -39,7 +43,7 @@ The buildkite build consists of three phases:
 2. test
 3. release
 
-e.g. https://buildkite.com/blake-education/student-events/builds/2860
+<small>e.g. https://buildkite.com/blake-education/student-events/builds/2860</small>
 
 ---
 
@@ -50,7 +54,7 @@ e.g. https://buildkite.com/blake-education/student-events/builds/2860
 3. runs `prepare_code` which does all the interesting work
 4. `docker build` the container for deployment and `docker push` it to AWS ECR
 
-https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build
+<small>https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build</small>
 
 ---
 
@@ -61,4 +65,4 @@ https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder
 
 There is also some work done to use a cache for the deps. That is a directory that exists on the EC2 build agent instance that is 'mounted' in the Docker container doing the build. At the end of the build process, those files are copied into the container because that cache-mount won't be available when running the container for real.
 
-https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-elixir-base/scripts/prepare_code
+<small>https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-elixir-base/scripts/prepare_code</small>
