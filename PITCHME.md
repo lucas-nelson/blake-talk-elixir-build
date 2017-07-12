@@ -51,9 +51,9 @@ The buildkite build consists of three phases:
 
 Running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
 
-1. pulls the `builder-elixir-1.4` container from AWS ECR and runs it to…
-2. clones the git repo at the right SHA for the build
-3. runs `prepare_code` which does all the interesting work
+1. pull the `builder-elixir-1.4` container from AWS ECR and runs it to…
+2. clone the git repo at the right SHA for the build
+3. run `prepare_code` which does all the interesting work
 4. `docker build` the container for deployment and `docker push` it to AWS ECR
 
 <small>https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build</small>
@@ -62,8 +62,9 @@ Running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
 
 ##### prepare_code
 
-1. installs `hex` and `rebar`
-2. `mix deps.get` and `mix compile` for the *staging* and *prod* environments
+1. install `hex` and `rebar`
+2. `mix deps.get` and `mix compile`
+3. for both the *staging* and *prod* environments
 
 <small>https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-elixir-base/scripts/prepare_code</small>
 
@@ -83,7 +84,7 @@ At this point the container that could be deployed to staging or production is c
 
 Running on an AWS EC2 instance, the buildkite 'ci-tester-agent':
 
-1. pulls the newly build docker image from AWS ECR and runs it with a 'test' command to…
+1. pull the newly build docker image from AWS ECR and runs it with a 'test' command to…
 2. run the `scripts/docker/ci.sh`
 
 <small>
@@ -96,8 +97,8 @@ https://github.com/blake-education/student_events/blob/develop/script/docker/ci.
 
 ##### ci.sh
 
-1. compiles for the `test` env
-2. drop, creates and migrates any databases it needs
+1. compile for the `test` env
+2. drop, create and migrate any databases it needs
 3. `mix test`
 4. `mix credo`
 
@@ -111,7 +112,7 @@ Has been explained to me as "it just tags the container".
 
 But the container was already tagged in the `prepare_code` stage: https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build#L96-L102
 
-So yeah I'm not sure. This stag does not do much
+So yeah I'm not sure. This stage does not do much.
 
 ---
 
