@@ -12,7 +12,7 @@
 
 ### containers
 
-There's a container called `builder-elixir-1.4` that has useful stuff in it…
+there's a container called `builder-elixir-1.4` that has useful stuff in it…
 
 ```bash
 docker \
@@ -39,26 +39,26 @@ Elixir 1.4.1
 
 ### buildkite
 
-The buildkite build consists of three phases:
+the buildkite build consists of three phases:
 
 1. build
 2. test
 3. release
 
-<small>e.g. https://buildkite.com/blake-education/student-events/builds/2860</small>
+<small>e.g. [student-events#2860](https://buildkite.com/blake-education/student-events/builds/2860)</small>
 
 ---
 
 #### build
 
-Running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
+running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
 
 1. pull the `builder-elixir-1.4` container from AWS ECR and runs it to…
 2. clone the git repo at the right SHA for the build
 3. run `prepare_code` which does all the interesting work
 4. `docker build` the container for deployment and `docker push` it to AWS ECR
 
-<small>https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build</small>
+<small>[dockerfiles/…/build](https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build)</small>
 
 ---
 
@@ -72,7 +72,7 @@ Running on an AWS EC2 instance, the buildkite 'ci-builder-agent':
 
 ---
 
-There is also work done to use a cache for the deps.
+there is also work done to use a cache for the deps:
 
 * a directory on the builder-agent is 'mounted' in the container
 * after compilation, the cached files are copied into the container
@@ -80,21 +80,24 @@ There is also work done to use a cache for the deps.
 
 ---
 
-At this point the container that could be deployed to staging or production is complete. It's in ECR
+at this point the container that could be deployed to staging or production is complete
+
+it's in ECR
+
+it won't change
 
 ---
 
 #### test
 
-Running on an AWS EC2 instance, the buildkite 'ci-tester-agent':
+running on an AWS EC2 instance, the buildkite 'ci-tester-agent':
 
 1. pull the newly build docker image from AWS ECR and runs it with a 'test' command to…
 2. run the `scripts/docker/ci.sh`
 
 <small>
-https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28
-https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12
-https://github.com/blake-education/student_events/blob/develop/script/docker/ci.sh
+(student_events/…/Dockerfile)[https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28]
+(student_events/…/entrypoint.sh)https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12]
 </small>
 
 ---
@@ -106,17 +109,19 @@ https://github.com/blake-education/student_events/blob/develop/script/docker/ci.
 3. `mix test`
 4. `mix credo`
 
-<small>https://github.com/blake-education/student_events/blob/develop/script/docker/ci.sh</small>
+<small>(student_events/…/ci.sh)[https://github.com/blake-education/student_events/blob/develop/script/docker/ci.sh</small>
 
 ---
 
 ### release
 
-Has been explained to me as "it just tags the container".
+has been explained to me as "it just tags the container"
 
-But the container was already tagged in the `prepare_code` stage: https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build#L96-L102
+but the container was already tagged in the `prepare_code` stage: (dockerfiles/…/build)[https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build#L96-L102]
 
-So yeah I'm not sure. This stage does not do much.
+so yeah I'm not sure
+
+this stage does not do much
 
 ---
 
