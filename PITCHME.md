@@ -22,6 +22,8 @@ docker \
   153929397925.dkr.ecr.us-west-2.amazonaws.com/builder-elixir-1.4
 ```
 
+devops made it for us
+
 ---
 
 ```bash
