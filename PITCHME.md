@@ -56,7 +56,8 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;builder&#8209;agent*:
 1. pull the *builder&#8209;elixir&#8209;1.4* container from AWS ECR and runs it to…
 2. clone the git repo at the right SHA for the build
 3. run `prepare_code` which does all the interesting work
-4. `docker build` the container for deployment and `docker push` it to AWS ECR
+4. `docker build` the new state of the container with a new `name:tag`
+5. `docker push` it to AWS ECR
 
 <small>[dockerfiles/…/build](https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build)</small>
 
