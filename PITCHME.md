@@ -68,7 +68,7 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;builder&#8209;agent*:
 2. `mix deps.get` and `mix compile`
 3. for both the *staging* and *prod* environments
 
-<small>(dockerfiles/…/prepare_code)[https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-elixir-base/scripts/prepare_code]</small>
+<small>[dockerfiles/…/prepare_code](https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-elixir-base/scripts/prepare_code)</small>
 
 ---
 
@@ -95,8 +95,10 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;tester&#8209;agent*:
 1. pull the newly build docker image from AWS ECR and runs it with a 'test' command to…
 2. run the `scripts/docker/ci.sh`
 
-<small>(student_events/…/Dockerfile)[https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28]</small>
-<small>(student_events/…/entrypoint.sh)[https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12]</small>
+<small>
+  [student_events/…/Dockerfile](https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28)
+  [student_events/…/entrypoint.sh](https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12)
+</small>
 
 ---
 
@@ -107,7 +109,7 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;tester&#8209;agent*:
 3. `mix test`
 4. `mix credo`
 
-<small>(student_events/…/ci.sh)[https://github.com/blake-education/student_events/blob/develop/script/docker/ci.sh</small>
+<small>[student_events/…/ci.sh](https://github.com/blake-education/student_events/blob/develop/script/docker/ci.sh)</small>
 
 ---
 
@@ -115,7 +117,7 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;tester&#8209;agent*:
 
 has been explained to me as "it just tags the container"
 
-but the container was already tagged in the `prepare_code` stage: (dockerfiles/…/build)[https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build#L96-L102]
+but the container was already tagged in the `prepare_code` stage: [dockerfiles/…/build](https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-base/build#L96-L102)
 
 so yeah I'm not sure
 
