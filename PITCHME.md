@@ -72,14 +72,6 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;builder&#8209;agent*:
 
 ---
 
-there is also work done to use a cache for the deps:
-
-* a directory on the builder-agent is 'mounted' in the container
-* after compilation, the cached files are copied into the container
-* otherwise they won't be available when running the container for real
-
----
-
 at this point the container that could be deployed to staging or production is complete
 
 it's in ECR
@@ -97,6 +89,7 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;tester&#8209;agent*:
 
 <small>
   [student_events/…/Dockerfile](https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28)
+
   [student_events/…/entrypoint.sh](https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12)
 </small>
 
