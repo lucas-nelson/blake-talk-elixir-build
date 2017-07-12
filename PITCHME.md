@@ -49,7 +49,9 @@ The buildkite build consists of three phases:
 
 #### build
 
-1. pulls the `builder-elixir-1.4` container from AWS ECR and runs the rest of these steps in that
+Running on an AWS EC2 instance, the buildkite 'agent':
+
+1. pulls the `builder-elixir-1.4` container from AWS ECR and runs it to…
 2. clones the git repo at the right SHA for the build
 3. runs `prepare_code` which does all the interesting work
 4. `docker build` the container for deployment and `docker push` it to AWS ECR
@@ -63,6 +65,6 @@ The buildkite build consists of three phases:
 1. installs `hex` and `rebar`
 2. `mix deps.get` and `mix compile` for the *staging* and *prod* environments
 
-There is also some work done to use a cache for the deps. That is a directory that exists on the EC2 build agent instance that is 'mounted' in the Docker container doing the build. At the end of the build process, those files are copied into the container because that cache-mount won't be available when running the container for real.
+<aside class="notice">There is also some work done to use a cache for the deps. That is a directory that exists on the EC2 build agent instance that is 'mounted' in the Docker container doing the build. At the end of the build process, those files are copied into the container because that cache-mount won't be available when running the container for real.</aside>
 
 <small>https://github.com/blake-education/dockerfiles/blob/develop/app-builders/builder-elixir-base/scripts/prepare_code</small>
