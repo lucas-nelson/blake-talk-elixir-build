@@ -89,9 +89,9 @@ running on an AWS EC2 instance, the buildkite *ci&#8209;tester&#8209;agent*:
 2. run the `scripts/docker/ci.sh`
 
 <small>
-  [student_events/…/Dockerfile](https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28)
-
-  [student_events/…/entrypoint.sh](https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12)
+[student_events/…/Dockerfile](https://github.com/blake-education/student_events/blob/develop/Dockerfile#L28)
+&
+[student_events/…/entrypoint.sh](https://github.com/blake-education/student_events/blob/develop/script/docker/entrypoint.sh#L10-L12)
 </small>
 
 ---
